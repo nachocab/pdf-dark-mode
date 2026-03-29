@@ -11,6 +11,7 @@ This extension is based on [PotatoZhou/darkpdf](https://github.com/PotatoZhou/da
 - Uses a toolbar checkbox for dark mode, plus a VS Code command and keyboard shortcut.
 - `ignoreDestinationZoom` is enabled, which prevents zoom jumps when you click PDF bookmarks or internal links.
 - The print shortcut is removed, so `Cmd+P` stays available for VS Code's own `Go to File` command.
+- The default view when opening the sidebar is the Document Outline (if available) instead of the thumbnails.
 
 ## Extension Settings
 
