@@ -10,6 +10,6 @@ suite('Extension Test Suite', () => {
         assert.ok(extension, `Expected extension ${extensionId} to be available`);
         await extension.activate();
         const commands = await vscode.commands.getCommands(true);
-        assert.ok(commands.includes('darkpdf.toggleDarkMode'));
+        assert.ok(commands.includes('pdfDarkMode.toggleDarkMode'));
     });
 });

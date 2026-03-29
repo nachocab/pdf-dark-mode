@@ -27,7 +27,7 @@ class PdfPreview extends disposable_1.Disposable {
                     break;
                 }
                 case 'toggle-color-mode': {
-                    vscode.commands.executeCommand('darkpdf.toggleDarkMode');
+                    vscode.commands.executeCommand('pdfDarkMode.toggleDarkMode');
                     break;
                 }
             }
@@ -68,7 +68,7 @@ class PdfPreview extends disposable_1.Disposable {
         this._previewState = 'Visible';
     }
     refresh() {
-        const colorMode = vscode.workspace.getConfiguration('darkpdf').get('default.colorMode', true);
+        const colorMode = vscode.workspace.getConfiguration('pdfDarkMode').get('default.colorMode', true);
         this.webviewEditor.webview.postMessage({ type: 'set-color-mode', enabled: colorMode });
     }
     getWebviewContents() {
@@ -76,7 +76,7 @@ class PdfPreview extends disposable_1.Disposable {
         const docPath = webview.asWebviewUri(this.resource);
         const cspSource = webview.cspSource;
         const resolveAsUri = (...p) => webview.asWebviewUri(vscode.Uri.joinPath(this.extensionRoot, ...p));
-        const config = vscode.workspace.getConfiguration('darkpdf');
+        const config = vscode.workspace.getConfiguration('pdfDarkMode');
         const initialColorMode = config.get('default.colorMode', true);
         const settings = {
             cMapUrl: resolveAsUri('lib', 'web', 'cmaps/').toString(),
@@ -86,6 +86,7 @@ class PdfPreview extends disposable_1.Disposable {
                 cursor: config.get('default.cursor'),
                 scale: config.get('default.scale'),
                 sidebar: config.get('default.sidebar'),
+                sidebarView: config.get('default.sidebarView'),
                 scrollMode: config.get('default.scrollMode'),
                 spreadMode: config.get('default.spreadMode'),
                 colorMode: initialColorMode,
@@ -375,7 +376,6 @@ ${initialColorMode ? dark : '<style id="invert-filter"></style>'}
                   <label for="toggle-dark-mode" style="display: inline-flex; align-items: center; gap: 6px; color: var(--pdf-toolbar-color); cursor: pointer; user-select: none;">
                     <input id="toggle-dark-mode" type="checkbox" ${initialColorMode ? 'checked' : ''} aria-label="Toggle dark mode">
                     <span id="toggle-dark-mode-label">Dark mode</span>
-                    <span id="toggle-dark-mode-shortcut" style="opacity: 0.75; font-size: 11px;"></span>
                   </label>
                 </div>
                 <div class="splitToolbarButtonSeparator" style="margin-left: 5px"></div>
@@ -524,32 +524,15 @@ ${initialColorMode ? dark : '<style id="invert-filter"></style>'}
     <script>
         const vscode = acquireVsCodeApi();
         const toggleDarkModeCheckbox = document.getElementById('toggle-dark-mode');
-        const toggleDarkModeShortcut = document.getElementById('toggle-dark-mode-shortcut');
         const invertFilter = document.getElementById('invert-filter');
-        const isMac = navigator.platform.toUpperCase().includes('MAC');
-        const shortcutLabel = isMac ? 'Cmd+Alt+D' : 'Ctrl+Alt+D';
         const darkModeCss = ".pdfViewer .page { filter: invert(100%); background-color: black; }";
 
         function setDarkMode(enabled) {
           invertFilter.textContent = enabled ? darkModeCss : '';
           toggleDarkModeCheckbox.checked = enabled;
-          toggleDarkModeShortcut.textContent = '(' + shortcutLabel + ')';
-        }
-
-        function shouldIgnoreShortcut(target) {
-          return target instanceof HTMLElement && (target.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName));
         }
 
         toggleDarkModeCheckbox.addEventListener('change', () => {
-          vscode.postMessage({ type: 'toggle-color-mode' });
-        });
-
-        document.addEventListener('keydown', (event) => {
-          const isToggleShortcut = (event.ctrlKey || event.metaKey) && event.altKey && !event.shiftKey && event.key.toLowerCase() === 'd';
-          if (!isToggleShortcut || event.repeat || shouldIgnoreShortcut(event.target)) {
-            return;
-          }
-          event.preventDefault();
           vscode.postMessage({ type: 'toggle-color-mode' });
         });
 

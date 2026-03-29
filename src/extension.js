@@ -7,7 +7,7 @@ function activate(context) {
     // Register our custom editor provider
     const provider = new pdfProvider_1.PdfCustomProvider(extensionRoot);
     vscode.workspace.onDidChangeConfiguration((event) => {
-        if (event.affectsConfiguration('darkpdf.default.colorMode')) {
+        if (event.affectsConfiguration('pdfDarkMode.default.colorMode')) {
             provider.refreshAllPreviews();
         }
     }, null, context.subscriptions);
@@ -17,8 +17,8 @@ function activate(context) {
             retainContextWhenHidden: true,
         },
     }));
-    const toggle = vscode.commands.registerCommand('darkpdf.toggleDarkMode', () => {
-        const config = vscode.workspace.getConfiguration('darkpdf');
+    const toggle = vscode.commands.registerCommand('pdfDarkMode.toggleDarkMode', () => {
+        const config = vscode.workspace.getConfiguration('pdfDarkMode');
         const currentMode = config.get('default.colorMode', true);
         return config.update('default.colorMode', !currentMode, vscode.ConfigurationTarget.Global);
     });
