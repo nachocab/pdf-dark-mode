@@ -1,0 +1,117 @@
+{
+  "name": "pdf-dark-mode",
+  "displayName": "PDF Dark Mode",
+  "description": "VS Code extension to open PDFs with a dark mode toggle and sane defaults.",
+  "version": "0.0.1",
+  "publisher": "nachocab",
+  "engines": {
+    "vscode": "^1.110.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "icon": "media/icon.png",
+  "keywords": [
+    "pdf",
+    "dark mode",
+    "viewer",
+    "preview"
+  ],
+  "activationEvents": [],
+  "main": "./src/extension.js",
+  "contributes": {
+    "capabilities": {
+      "untrustedWorkspaces": {
+        "supported": true
+      }
+    },
+    "commands": [
+      {
+        "command": "darkpdf.toggleDarkMode",
+        "title": "Toggle Dark Mode",
+        "category": "PDF Dark Mode"
+      }
+    ],
+    "customEditors": [
+      {
+        "viewType": "pdf.preview",
+        "displayName": "PDF Preview",
+        "selector": [
+          {
+            "filenamePattern": "*.pdf"
+          }
+        ]
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Dark PDF Preview",
+      "properties": {
+        "darkpdf.default.cursor": {
+          "markdownDescription": "The default cursor tool for preview.",
+          "type": "string",
+          "default": "select",
+          "enum": [
+            "select",
+            "hand"
+          ]
+        },
+        "darkpdf.default.scale": {
+          "markdownDescription": "The default zoom level for preview. Allowed values are `auto`, `page-actual`, `page-fit`, `page-width`, and 1-based scale values. (`1.0` means 100%)",
+          "type": "string",
+          "default": "auto",
+          "pattern": "^(\\d+(?:\\.\\d+)?|auto|page-actual|page-fit|page-width)$"
+        },
+        "darkpdf.default.sidebar": {
+          "markdownDescription": "Show the sidebar on load. The default visibility of sidebar for preview.",
+          "type": "boolean",
+          "default": false
+        },
+        "darkpdf.default.scrollMode": {
+          "markdownDescription": "The default scroll mode for preview.",
+          "type": "string",
+          "default": "vertical",
+          "enum": [
+            "vertical",
+            "horizontal",
+            "wrapped"
+          ]
+        },
+        "darkpdf.default.spreadMode": {
+          "markdownDescription": "The default spread mode for preview.",
+          "type": "string",
+          "default": "none",
+          "enum": [
+            "none",
+            "odd",
+            "even"
+          ]
+        },
+        "darkpdf.default.colorMode": {
+          "markdownDescription": "The default color mode for preview(dark/original).",
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "darkpdf.toggleDarkMode",
+        "key": "ctrl+alt+d",
+        "mac": "cmd+alt+d",
+        "when": "activeCustomEditorId == 'pdf.preview'"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run lint",
+    "pretest": "npm run lint",
+    "lint": "eslint src",
+    "test": "node ./src/test/runTest.js"
+  },
+  "devDependencies": {
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2",
+    "eslint": "^9.39.3"
+  }
+}
