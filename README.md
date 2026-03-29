@@ -4,11 +4,15 @@
 
 This extension is based on [PotatoZhou/darkpdf](https://github.com/PotatoZhou/darkpdf).
 
+![PDF Dark Mode screenshot](media/screenshot.png)
+
 ## Features
 
 - Applies an inverted dark mode by default.
 - Defaults to `page-width` zoom on load.
 - Uses a toolbar checkbox for dark mode, plus a VS Code command and keyboard shortcut.
+- Adds `Back` and `Forward` buttons for PDF navigation history.
+- Adds `Print` command in the Tools area.
 - `ignoreDestinationZoom` is enabled, which prevents zoom jumps when you click PDF bookmarks or internal links.
 - The print shortcut is removed, so `Cmd+P` stays available for VS Code's own `Go to File` command.
 - The default view when opening the sidebar is the Document Outline (if available) instead of the thumbnails.

@@ -2258,6 +2258,18 @@ body {
           mask-image: var(--toolbarButton-pageDown-icon);
 }
 
+#historyBack::before {
+  -webkit-mask-image: var(--toolbarButton-pageUp-icon);
+          mask-image: var(--toolbarButton-pageUp-icon);
+  transform: rotate(270deg);
+}
+
+#historyForward::before {
+  -webkit-mask-image: var(--toolbarButton-pageDown-icon);
+          mask-image: var(--toolbarButton-pageDown-icon);
+  transform: rotate(270deg);
+}
+
 #zoomOut::before {
   -webkit-mask-image: var(--toolbarButton-zoomOut-icon);
           mask-image: var(--toolbarButton-zoomOut-icon);
@@ -2284,7 +2296,8 @@ body {
 }
 
 #print::before,
-#secondaryPrint::before {
+#secondaryPrint::before,
+#customPrint::before {
   -webkit-mask-image: var(--toolbarButton-print-icon);
           mask-image: var(--toolbarButton-print-icon);
 }
