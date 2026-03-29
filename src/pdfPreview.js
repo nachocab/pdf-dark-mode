@@ -252,15 +252,9 @@ ${initialColorMode ? dark : '<style id="invert-filter"></style>'}
             <div class="horizontalToolbarSeparator"></div>
             </div>
 
-            <button id="customPrint" class="secondaryToolbarButton" title="Print" tabindex="52">
-              <span>Print</span>
-            </button>
-
-            <button id="secondaryPrint" class="secondaryToolbarButton visibleMediumView hidden" title="Print" tabindex="-1" data-l10n-id="print" aria-hidden="true">
+            <button id="secondaryPrint" class="secondaryToolbarButton hidden" title="Print" tabindex="-1" data-l10n-id="print" aria-hidden="true">
               <span data-l10n-id="print_label">Print</span>
             </button>
-
-            <div class="horizontalToolbarSeparator"></div>
 
             <button id="firstPage" class="secondaryToolbarButton" title="Go to First Page" tabindex="56" data-l10n-id="first_page">
               <span data-l10n-id="first_page_label">Go to First Page</span>
@@ -339,12 +333,15 @@ ${initialColorMode ? dark : '<style id="invert-filter"></style>'}
                 <button id="viewFind" class="toolbarButton" title="Find in Document" tabindex="12" data-l10n-id="findbar" aria-expanded="false" aria-controls="findbar">
                   <span data-l10n-id="findbar_label">Find</span>
                 </button>
-                <button id="historyBack" class="toolbarButton hiddenSmallView" title="Go Back to Previous Location" tabindex="13">
-                  <span>Back</span>
-                </button>
-                <button id="historyForward" class="toolbarButton hiddenSmallView" title="Go Forward to Next Location" tabindex="14">
-                  <span>Forward</span>
-                </button>
+                <div class="splitToolbarButton hiddenSmallView">
+                  <button id="historyBack" class="toolbarButton" title="Go Back to Previous Location" tabindex="13">
+                    <span>Back</span>
+                  </button>
+                  <div class="splitToolbarButtonSeparator"></div>
+                  <button id="historyForward" class="toolbarButton" title="Go Forward to Next Location" tabindex="14">
+                    <span>Forward</span>
+                  </button>
+                </div>
                 <div class="splitToolbarButton hiddenSmallView">
                   <button class="toolbarButton" title="Previous Page" id="previous" tabindex="15" data-l10n-id="previous">
                     <span data-l10n-id="previous_label">Previous</span>
@@ -363,7 +360,7 @@ ${initialColorMode ? dark : '<style id="invert-filter"></style>'}
                   <span data-l10n-id="open_file_label">Open</span>
                 </button>
 
-                <button id="print" class="toolbarButton hiddenMediumView" title="Print" tabindex="32" data-l10n-id="print">
+                <button id="print" class="toolbarButton hidden" title="Print" tabindex="-1" data-l10n-id="print" aria-hidden="true">
                   <span data-l10n-id="print_label">Print</span>
                 </button>
 

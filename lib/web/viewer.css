@@ -2296,8 +2296,7 @@ body {
 }
 
 #print::before,
-#secondaryPrint::before,
-#customPrint::before {
+#secondaryPrint::before {
   -webkit-mask-image: var(--toolbarButton-print-icon);
           mask-image: var(--toolbarButton-print-icon);
 }
