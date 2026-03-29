@@ -2,7 +2,7 @@
   "name": "pdf-dark-mode",
   "displayName": "PDF Dark Mode",
   "description": "VS Code extension to open PDFs with a dark mode toggle and sane defaults.",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "publisher": "nachocab",
   "repository": {
     "type": "git",
